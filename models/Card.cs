@@ -3,6 +3,7 @@ namespace ProjectJack.Models {
         public int Value { get; set; }
         public ESuit Suit { get; set; }
         public string DisplayValue { get; set; }
+        public string DisplaySuit { get; set; }
 
         public Card(int value, ESuit suit)
         {
@@ -10,6 +11,7 @@ namespace ProjectJack.Models {
             this.Suit = suit;
 
             this.DisplayValue = this.SetDisplayValue(value);
+            this.DisplaySuit = this.SetDisplaySuit(suit);
         }
 
         private string SetDisplayValue(int value)
@@ -33,6 +35,23 @@ namespace ProjectJack.Models {
                 return "K";
 
             return "Joker";
+        }
+
+        private string SetDisplaySuit(ESuit suit)
+        {
+            switch (suit)
+            {
+                case ESuit.Hearts:
+                    return "♥";
+                case ESuit.Diamonds:
+                    return "♦";
+                case ESuit.Clubs:
+                    return "♣";
+                case ESuit.Spades:
+                    return "♠";
+                default:
+                    return "SUIT";
+            }
         }
     }
 }
