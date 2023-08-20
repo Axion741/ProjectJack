@@ -119,26 +119,26 @@ namespace ProjectJack
 
             for (int i = 0; i < cardsToPlay; i++)
             {
+                var card = player.Deck.Cards[0];
+                discard.Add(card);
+                player.Deck.Cards.Remove(card);
+                Console.WriteLine($"{card.DisplaySuit} {card.DisplayValue} ({player.Name})");
+
                 if (player.Deck.Cards.Count == 0)
                 {
                     player.HasWon = true;
                     return;
                 }
 
-                var card = player.Deck.Cards[0];
-                discard.Add(card);
-                player.Deck.Cards.Remove(card);
-                Console.WriteLine($"{card.DisplaySuit} {card.DisplayValue} ({player.Name})");
-
                 if (faceCardValues.Contains(card.Value))
-                    continue;
+                    break;
             }            
 
             if (faceCardValues.Contains(discard.Last().Value) == false && pickup)
             {
                 discard.Reverse();
                 player.Deck.Cards.AddRange(discard);
-                Console.WriteLine($"{player.Name} picked up {discard.Count}");
+                Console.WriteLine($"{player.Name} picked up {discard.Count} ({player.Deck.Cards.Count})");
                 discard.Clear();
             }
         }
